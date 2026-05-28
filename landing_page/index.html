@@ -319,6 +319,23 @@
             100% {
                 left: 125%;
             }
+
+        }
+        /* Hero Fade Slider */
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: heroSlider 12s infinite ease-in-out;
+        }
+        .hero-slide:nth-child(1) { animation-delay: 0s; }
+        .hero-slide:nth-child(2) { animation-delay: 4s; }
+        .hero-slide:nth-child(3) { animation-delay: 8s; }
+
+        @keyframes heroSlider {
+            0%, 100% { opacity: 0; transform: scale(1.02); }
+            8%, 33% { opacity: 1; transform: scale(1); }
+            41% { opacity: 0; transform: scale(0.98); }
         }
     </style>
 </head>
@@ -420,7 +437,7 @@
 
     <main class="flex flex-col pt-16 sm:pt-20">
         <!-- Hero Section -->
-        <section class="relative overflow-hidden pt-12 pb-16 lg:pt-24 lg:pb-32">
+        <section class="relative overflow-hidden pt-6 pb-12 lg:pt-12 lg:pb-20">
             <!-- Background Decorations -->
             <div class="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-red-500/5 rounded-full blur-3xl pointer-events-none"></div>
             <div class="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -468,32 +485,23 @@
                             <div class="absolute inset-0 bg-gradient-to-br from-red-100 to-orange-50 rounded-full blur-3xl opacity-60 animate-pulse-slow"></div>
                             
                             <!-- Main large image -->
-                            <div class="relative glass-card rounded-3xl overflow-hidden shadow-2xl animate-float z-10 aspect-[4/3]">
-                                <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(2).jpeg" 
-                                     alt="Fresh Food at MOPY" 
-                                     class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700">
-                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-16 text-white">
-                                    <h3 class="text-xl font-bold mb-1">Made Fresh Daily</h3>
-                                    <p class="text-white/80 text-sm">Hot meals, happy offices.</p>
+                           <div class="relative lg:h-[500px] flex items-center justify-center reveal-up active delay-200">
+                        <div class="relative w-full max-w-[500px] mx-auto">
+                            <div class="absolute inset-0 bg-gradient-to-br from-red-100 to-orange-50 rounded-full blur-3xl opacity-60 animate-pulse-slow"></div>
+                            
+                            <div class="relative glass-card rounded-3xl overflow-hidden shadow-2xl z-10 aspect-[4/3] w-full border-4 border-white bg-white">
+                                <div class="absolute inset-0">
+                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(2).jpeg" alt="Fresh Food at MOPY" class="hero-slide w-full h-full object-cover">
+                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM%20(2).jpeg" alt="Mopy Snacks" class="hero-slide w-full h-full object-cover">
+                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM.jpeg" alt="Mopy Counter" class="hero-slide w-full h-full object-cover">
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-6 pt-16 text-white z-20">
+                                    <h3 class="text-lg font-bold mb-0.5">Fresh Corporate Catering</h3>
+                                    <p class="text-white/80 text-xs">Hot meals delivered straight to your workstation layout daily.</p>
                                 </div>
                             </div>
-
-                            <!-- Bottom row thumbnails -->
-                            <div class="grid grid-cols-3 gap-3 mt-3 z-10 relative">
-                                <div class="rounded-2xl overflow-hidden aspect-square shadow-lg border-2 border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer">
-                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM%20(2).jpeg" 
-                                         alt="Mopy Snacks" class="w-full h-full object-cover">
-                                </div>
-                                <div class="rounded-2xl overflow-hidden aspect-square shadow-lg border-2 border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer">
-                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.48%20PM%20(1).jpeg" 
-                                         alt="Mopy Kiosk" class="w-full h-full object-cover">
-                                </div>
-                                <div class="rounded-2xl overflow-hidden aspect-square shadow-lg border-2 border-white/60 hover:scale-105 transition-transform duration-300 cursor-pointer">
-                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM.jpeg" 
-                                         alt="Mopy Counter" class="w-full h-full object-cover">
-                                </div>
-                            </div>
-
+                        </div>
+                    </div>
                             <!-- Floating Badge 1 -->
                             <div class="absolute -right-4 top-8 glass-card p-3 rounded-2xl shadow-glow animate-bounce-gentle z-20 flex items-center gap-3 max-w-[190px]">
                                 <div class="w-9 h-9 rounded-full bg-green-100 text-green-600 flex items-center justify-center flex-shrink-0">
@@ -554,61 +562,108 @@
                     <p class="text-text-sub dark:text-gray-400 max-w-lg mx-auto text-lg">From corporates to consulting firms, MOPY powers the lunch breaks of India's top offices.</p>
                 </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-20">
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">01</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Air Products India Pvt Ltd</h4>
-                            <p class="text-xs text-text-sub mt-1">Nillamber Corporate Park</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/airproducts.jpeg" alt="Air Products" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">01</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Air Products India</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Nillamber Corporate Park</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">02</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Deepak Nitrate Group</h4>
-                            <p class="text-xs text-text-sub mt-1">Aurum Business Centre</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/deepak.jpeg" alt="Deepak Nitrate" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">02</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Deepak Nitrate Group</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Aurum Business Centre</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">03</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Aditi Consulting</h4>
-                            <p class="text-xs text-text-sub mt-1">Nillamber Triumph</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/aditi.jpeg" alt="Aditi Consulting" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">03</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Aditi Consulting</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Nillamber Triumph</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">04</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Rexel India Pvt Ltd</h4>
-                            <p class="text-xs text-text-sub mt-1">Panorama Complex</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/rexel.jpeg" alt="Rexel India" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">04</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Rexel India Pvt Ltd</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Panorama Complex</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">05</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Collabera Talent Solutions</h4>
-                            <p class="text-xs text-text-sub mt-1">India Bulls Mega Mall</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/collabera.jpeg" alt="Collabera" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">05</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Collabera Solutions</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">India Bulls Mega Mall</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">06</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Varadigm India Pvt Ltd</h4>
-                            <p class="text-xs text-text-sub mt-1">Trivia Complex</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/veradigm.jpeg" alt="Varadigm India" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">06</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Varadigm India Pvt Ltd</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Trivia Complex</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">07</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Allscript India Pvt Ltd</h4>
-                            <p class="text-xs text-text-sub mt-1">Prime Business Node</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/allscripts.jpeg" alt="Allscript India" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">07</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Allscript India Pvt Ltd</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Prime Business Node</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-2xl p-5 flex items-start gap-4 hover:border-primary hover:shadow-glow transition-all duration-300 shadow-soft">
-                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">08</div>
-                        <div>
-                            <h4 class="font-bold text-sm text-text-main dark:text-white">Stemons India Pvt Ltd</h4>
-                            <p class="text-xs text-text-sub mt-1">Corporate Corridor Node</p>
+
+                    <div class="group bg-white dark:bg-white/5 border border-border-subtle rounded-xl p-4 flex flex-col justify-between items-stretch min-h-[160px] hover:border-primary hover:shadow-soft transition-all duration-300">
+                        <div class="h-16 rounded-lg bg-gray-50 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-700 flex items-center justify-center p-2 overflow-hidden group-hover:bg-white dark:group-hover:bg-gray-900 transition-colors">
+                            <img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/aditi.jpeg" alt="Stemons India" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="mt-3 border-t border-gray-100 dark:border-gray-800 pt-2 flex items-start gap-2">
+                            <div class="w-5 h-5 rounded bg-primary/10 flex items-center justify-center text-primary font-bold text-[10px] shrink-0 mt-0.5">08</div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-text-main dark:text-white truncate">Stemons India Pvt Ltd</h4>
+                                <p class="text-[10px] text-text-sub dark:text-gray-400 truncate mt-0.5">Corporate Corridor Node</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -621,62 +676,72 @@
                 </div>
 
                 <!-- Masonry Photo Gallery -->
-                <div class="columns-2 sm:columns-3 lg:columns-4 gap-3 space-y-3">
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM.jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Mopy Kiosk</span>
+           <div class="relative max-w-2xl mx-auto px-4 mt-8">
+                    <div class="glass-card rounded-2xl overflow-hidden shadow-xl aspect-[16/10] bg-white relative">
+                        <div class="relative max-w-2xl mx-auto px-4 mt-8">
+                    <div class="glass-card rounded-2xl overflow-hidden shadow-xl aspect-[16/10] bg-white relative">
+                        
+                        <div class="office-slide w-full h-full absolute inset-0 block transition-all duration-500">
+                            <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM.jpeg" class="w-full h-full object-cover" alt="Mopy Kiosk Setup">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-5 text-white">
+                                <span class="text-sm font-bold">Mopy Kiosk Setup</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(1).jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Client Office</span>
+
+                        <div class="office-slide w-full h-full absolute inset-0 hidden transition-all duration-500">
+                            <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(1).jpeg" class="w-full h-full object-cover" alt="Client Office Context">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-5 text-white">
+                                <span class="text-sm font-bold">Client Office </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(2).jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Fresh Food</span>
+
+                        <div class="office-slide w-full h-full absolute inset-0 hidden transition-all duration-500">
+                            <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(2).jpeg" class="w-full h-full object-cover" alt="Fresh Food Presentation Gallery">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-5 text-white">
+                                <span class="text-sm font-bold">Fresh Food </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.48%20PM.jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Mopy Setup</span>
+
+                        <div class="office-slide w-full h-full absolute inset-0 hidden transition-all duration-500">
+                            <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.48%20PM.jpeg" class="w-full h-full object-cover" alt="Corporate Breakroom Deployment">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-5 text-white">
+                                <span class="text-sm font-bold">Our Pantry</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM%20(1).jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Our Team</span>
+
+                        <div class="office-slide w-full h-full absolute inset-0 hidden transition-all duration-500">
+                            <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.48%20PM%20(1).jpeg" class="w-full h-full object-cover" alt="Active Food Service Kiosk">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-5 text-white">
+                                <span class="text-sm font-bold">Active Food Service </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM%20(2).jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Office Pantry</span>
+                         <div class="office-slide w-full h-full absolute inset-0 hidden transition-all duration-500">
+                            <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM.jpeg" class="w-full h-full object-cover" alt="Active Food Service Kiosk">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 p-5 text-white">
+                                <span class="text-sm font-bold">Our Counter</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM.jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Mopy Counter</span>
-                        </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.48%20PM%20(1).jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Mopy Branding</span>
-                        </div>
-                    </div>
-                    <div class="break-inside-avoid rounded-2xl overflow-hidden relative group cursor-pointer">
-                        <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.49%20PM.jpeg" alt="Mopy Office" class="w-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white text-xs font-bold">Mopy Pantry</span>
-                        </div>
+                        
+                        
+                     
+                        <button onclick="changeOfficeSlide(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main p-2 rounded-full shadow-md z-20 flex items-center justify-center transition-colors">
+                            <span class="material-symbols-outlined text-base">arrow_back_ios_new</span>
+                        </button>
+                        <button onclick="changeOfficeSlide(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-text-main p-2 rounded-full shadow-md z-20 flex items-center justify-center transition-colors">
+                            <span class="material-symbols-outlined text-base">arrow_forward_ios</span>
+                        </button>
                     </div>
                 </div>
+
+                <script>
+                    let currentOfficeIdx = 0;
+                    function changeOfficeSlide(direction) {
+                        const slides = document.querySelectorAll('.office-slide');
+                        slides[currentOfficeIdx].classList.add('hidden');
+                        currentOfficeIdx = (currentOfficeIdx + direction + slides.length) % slides.length;
+                        slides[currentOfficeIdx].classList.remove('hidden');
+                    }
+                </script>
             </div>
         </section>
 
@@ -1132,36 +1197,31 @@
                     <h3 class="text-3xl font-bold text-text-main dark:text-white mb-4">The Minds Behind Mopy</h3>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8 mb-16">
-                    <div class="bg-surface-muted dark:bg-white/5 rounded-3xl p-6 border border-border-subtle flex flex-col sm:flex-row gap-6 items-center">
-                        <div class="w-36 h-48 rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:bg-gray-800 border border-border-subtle flex flex-col items-center justify-center text-center p-4 shrink-0">
-                            <span class="material-symbols-outlined text-5xl text-primary mb-2">person</span>
-                            <span class="text-[10px] text-text-sub font-bold uppercase tracking-wider">[ Photo Space ]</span>
+               <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-surface-muted dark:bg-white/5 rounded-2xl p-6 border border-border-subtle flex flex-col sm:flex-row gap-5 items-start">
+                        <div class="w-full sm:w-28 h-28 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border border-gray-300 flex flex-col items-center justify-center text-center p-2 shrink-0">
+                           
+                            <span class="text-[9px] text-text-sub font-bold uppercase mt-1"><img src="https://raw.githubusercontent.com/sritixz/mopy_va/main/landing_page/Lokendra.jpeg" alt="Aditi"></span>
                         </div>
                         <div class="flex-1">
-                            <h4 class="text-xl font-bold text-text-main dark:text-white">Lokendra Singh Bhardwaj</h4>
-                            <p class="text-sm text-primary font-semibold mb-3">Founder and Chief Strategy Officer</p>
-                            <p class="text-xs text-text-sub dark:text-gray-400 leading-relaxed">
-                                A Hotel Management graduate and MBA professional with 22+ years of diverse experience across Banking & Finance and Food & Hospitality sectors. Scales enterprise food brand formats safely.
-                            </p>
+                            <h4 class="text-base font-bold text-text-main dark:text-white">Lokendra Singh Bhardwaj</h4>
+                            <p class="text-xs text-primary font-bold mb-2">Founder and Chief Strategy Officer</p>
+                            <p class="text-xs text-text-sub dark:text-gray-400 leading-normal">A Hotel Management graduate and MBA professional with over 22 years of multi-format enterprise execution experience across corporate finance channels and active hospitality frameworks.</p>
                         </div>
                     </div>
 
-                    <div class="bg-surface-muted dark:bg-white/5 rounded-3xl p-6 border border-border-subtle flex flex-col sm:flex-row gap-6 items-center">
-                        <div class="w-36 h-48 rounded-2xl bg-gradient-to-br from-red-50 to-orange-50 dark:bg-gray-800 border border-border-subtle flex flex-col items-center justify-center text-center p-4 shrink-0">
-                            <span class="material-symbols-outlined text-5xl text-primary mb-2">engineering</span>
-                            <span class="text-[10px] text-text-sub font-bold uppercase tracking-wider">[ Photo Space ]</span>
+                    <div class="bg-surface-muted dark:bg-white/5 rounded-2xl p-6 border border-border-subtle flex flex-col sm:flex-row gap-5 items-start">
+                        <div class="w-full sm:w-28 h-28 rounded-xl bg-gradient-to-br from-red-50 to-orange-50 border border-gray-300 flex flex-col items-center justify-center text-center p-2 shrink-0">
+                            <span class="material-symbols-outlined text-3xl text-primary">engineering</span>
+                            <span class="text-[9px] text-text-sub font-bold uppercase mt-1">[ Photo Placeholder ]</span>
                         </div>
                         <div class="flex-1">
-                            <h4 class="text-xl font-bold text-text-main dark:text-white">Shravan Kumar Bharati</h4>
-                            <p class="text-sm text-primary font-semibold mb-3">Chief Executive Officer</p>
-                            <p class="text-xs text-text-sub dark:text-gray-400 leading-relaxed">
-                                Leads technical operations execution, digital pipeline expansion architectures, platform features integration, and operational growth metrics optimization across multi-city nodes.
-                            </p>
+                            <h4 class="text-base font-bold text-text-main dark:text-white">Shravan Kumar Bharati</h4>
+                            <p class="text-xs text-primary font-bold mb-2">Chief Executive Officer</p>
+                            <p class="text-xs text-text-sub dark:text-gray-400 leading-normal">Directs tactical platform operational parameters, backend technology integrations, field deployment architectures, and corporate scaling profiles across core zones.</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="bg-white/40 dark:bg-white/5 rounded-3xl p-8 border border-border-subtle text-center">
                     <h4 class="font-bold text-text-main dark:text-white uppercase tracking-widest text-xs mb-8">Culinary Operations & Clean Kitchen Infrastructure</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
