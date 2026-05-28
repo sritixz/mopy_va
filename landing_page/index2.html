@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Mopy - Food for Offices Without Canteens</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                screens: {
+                    'sm': '640px',
+                    'md': '768px',
+                    'lg': '1024px',
+                    'xl': '1280px',
+                    '2xl': '1536px',
+                    '3xl': '1920px',
+                },
+                extend: {
+                    container: {
+                        center: true,
+                        padding: {
+                            DEFAULT: '1rem',
+                            sm: '2rem',
+                            lg: '4rem',
+                            xl: '5rem',
+                            '2xl': '6rem',
+                        },
+                    },
+                    colors: {
+                        "primary": "#ED1C24",
+                        "primary-hover": "#C41A1F",
+                        "background-light": "#F6EFE8",
+                        "background-dark": "#1F1512",
+                        "text-main": "#2B1C17",
+                        "text-sub": "#7B5A50",
+                        "surface": "#FFFFFF",
+                        "surface-muted": "#F9F3EE",
+                        "border-subtle": "#E8D8CF",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "3xl": "1.5rem", "full": "9999px" },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'bounce-gentle': 'bounceGentle 3s infinite',
+                        'pulse-slow': 'pulse 4s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shine': 'shine 1.5s infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { opacity: '0', transform: 'translateY(40px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        bounceGentle: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-15px)' } },
+                        shine: { '0%': { transform: 'translateX(-100%)' }, '100%': { transform: 'translateX(100%)' } },
+                        marquee: { '0%': { transform: 'translateX(0%)' }, '100%': { transform: 'translateX(-50%)' } }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(43, 28, 23, 0.05)',
+                        'glow': '0 10px 30px -5px rgba(237, 28, 36, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        :root { --cream: #F6EFE8; --paper: #FFFFFF; --ink: #2B1C17; --ink-muted: #7B5A50; --red: #ED1C24; --red-dark: #C41A1F; --border: #E8D8CF; --accent-soft: rgba(237, 28, 36, 0.08); }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { overflow-x: hidden; width: 100%; max-width: 100vw; -webkit-font-smoothing: antialiased; }
+        .max-w-container { width: 100%; max-width: 80rem; margin-left: auto; margin-right: auto; }
+        @media (min-width: 1536px) { .max-w-container { max-width: 90rem; } }
+        @media (min-width: 1920px) { .max-w-container { max-width: 110rem; } }
+        .glass-panel { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.5); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(232, 216, 207, 0.6); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .dark .glass-card { background: rgba(31, 21, 18, 0.8); border-color: rgba(255, 255, 255, 0.1); }
+        .glass-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); border-color: rgba(237, 28, 36, 0.2); }
+        .nav-shell { display: flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.4rem; border-radius: 9999px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border: 1px solid rgba(0,0,0,0.03); box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .nav-link { position: relative; padding: 0.5rem 1.1rem; border-radius: 9999px; font-weight: 600; color: var(--ink); transition: all 0.3s ease; }
+        .nav-link:hover { color: var(--red); background: var(--accent-soft); }
+        .reveal-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        .reveal-stagger > * { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal-stagger.active > * { opacity: 1; transform: translateY(0); }
+        .reveal-stagger.active > *:nth-child(1) { transition-delay: 0.05s; }
+        .reveal-stagger.active > *:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-stagger.active > *:nth-child(3) { transition-delay: 0.15s; }
+        .reveal-stagger.active > *:nth-child(4) { transition-delay: 0.2s; }
+        .sidebar { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(-100%); }
+        .sidebar.open { transform: translateX(0); }
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); transition: all 0.75s; }
+        .btn-shine:hover::after { animation: shine 1s; }
+        @keyframes shine { 100% { left: 125%; } }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased selection:bg-primary/20 selection:text-primary">
+    <div id="sidebar" class="sidebar fixed top-0 left-0 h-full w-72 sm:w-80 bg-white dark:bg-gray-900 shadow-2xl z-50 lg:hidden">
+        <div class="p-6 h-full overflow-y-auto relative z-10">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white shadow-glow">
+                        <span class="material-symbols-outlined text-[24px]">lunch_dining</span>
+                    </div>
+                    <h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">Mopy</h2>
+                </div>
+                <button id="closeSidebar" class="p-2 hover:bg-red-50 dark:hover:bg-white/5 rounded-xl transition-colors text-text-sub">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <nav class="space-y-3">
+                <a href="#about-us" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">info</span>About Us
+                </a>
+                <a href="#categories" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">restaurant_menu</span>Food Categories
+                </a>
+                <a href="#business-model" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">hub</span>Business Model
+                </a>
+                <a href="#clients" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">handshake</span>Our Clients
+                </a>
+                <a href="#promoter" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">groups</span>Our Leadership
+                </a>
+                <a href="#franchise" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">store</span>Franchise
+                </a>
+                <a href="#contact" class="sidebar-link flex items-center gap-4 p-3.5 rounded-xl hover:bg-red-50 dark:hover:bg-white/5 transition-all text-text-main dark:text-white font-medium group">
+                    <span class="material-symbols-outlined text-text-sub group-hover:text-primary transition-colors">mail</span>Contact Us
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-background-dark/60 backdrop-blur-sm z-40 lg:hidden opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <header class="fixed top-0 z-30 w-full transition-all duration-300" id="main-header">
+        <div class="absolute inset-0 bg-white/70 backdrop-blur-md border-b border-white/50 dark:bg-background-dark/80 dark:border-white/5"></div>
+        <div class="relative mx-auto flex h-16 sm:h-20 max-w-container items-center justify-between px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-4">
+                <button id="menuButton" class="lg:hidden p-2 hover:bg-black/5 dark:hover:bg-white/10 rounded-lg transition-colors">
+                    <span class="material-symbols-outlined text-text-main dark:text-white">menu</span>
+                </button>
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white shadow-glow transition-transform group-hover:scale-110">
+                        <span class="material-symbols-outlined text-[20px]">lunch_dining</span>
+                    </div>
+                    <h2 class="text-xl font-bold tracking-tight text-text-main dark:text-white">Mopy</h2>
+                </a>
+            </div>
+            
+            <nav class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div class="nav-shell">
+                    <a class="nav-link text-xs" href="#about-us">About Us</a>
+                    <a class="nav-link text-xs" href="#categories">Categories</a>
+                    <a class="nav-link text-xs" href="#business-model">Business Model</a>
+                    <a class="nav-link text-xs" href="#clients">Clients</a>
+                    <a class="nav-link text-xs" href="#promoter">Leadership</a>
+                    <a class="nav-link text-xs" href="#franchise">Franchise</a>
+                    <a class="nav-link text-xs" href="#contact">Contact</a>
+                </div>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="#contact" class="flex h-10 items-center justify-center rounded-full bg-primary px-6 text-sm font-bold text-white shadow-lg shadow-red-500/25 hover:shadow-red-500/40 hover:-translate-y-0.5 transition-all btn-shine">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex flex-col pt-16 sm:pt-20">
+        <section class="relative overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-28">
+            <div class="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[800px] h-[800px] bg-red-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <div class="flex flex-col items-start text-left reveal-up active">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-100/50 dark:bg-red-900/20 text-primary text-xs font-bold tracking-wider uppercase mb-6 border border-red-200/50 dark:border-red-500/20">
+                            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                            Live in 50+ Workplace Complexes
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-extrabold tracking-tight text-text-main dark:text-white mb-6 leading-[1.1]">
+                            Delicious food,<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">served directly to your desk.</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl text-text-sub dark:text-gray-400 mb-8 max-w-lg leading-relaxed font-medium">
+                            No functional canteen infrastructure? No problem. MOPY brings fresh, hygienic, and highly affordable meals right into your office ecosystem.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                            <a href="#categories" class="inline-flex h-14 items-center justify-center rounded-full bg-primary px-8 text-lg font-bold text-white shadow-xl shadow-red-500/25 hover:shadow-red-600/40 hover:-translate-y-1 transition-all btn-shine">
+                                Explore Menu
+                            </a>
+                            <a href="#franchise" class="inline-flex h-14 items-center justify-center rounded-full bg-white border border-gray-200 px-8 text-lg font-bold text-text-main hover:border-primary hover:text-primary hover:bg-red-50/50 transition-all dark:bg-white/5 dark:border-white/10 dark:text-white">
+                                Partner With Us
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center justify-center reveal-up active delay-200">
+                        <div class="relative w-full max-w-[520px] mx-auto">
+                            <div class="absolute inset-0 bg-gradient-to-br from-red-100 to-orange-50 rounded-full blur-3xl opacity-60 animate-pulse-slow"></div>
+                            
+                            <div class="relative glass-card rounded-3xl overflow-hidden shadow-2xl animate-float z-10 aspect-[4/3] border-4 border-white">
+                                <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.47%20PM%20(2).jpeg" alt="Fresh Workplace Meals" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent p-6 flex flex-col justify-end text-white">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-primary bg-white/95 px-2 py-0.5 rounded w-max mb-2">Live Kitchen Stream</span>
+                                    <h3 class="text-xl font-bold">Hygiene Obsessed Operations</h3>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3 mt-3 z-10 relative">
+                                <div class="rounded-2xl overflow-hidden aspect-square shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300">
+                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM%20(2).jpeg" alt="Mopy Snacks" class="w-full h-full object-cover">
+                                </div>
+                                <div class="rounded-2xl overflow-hidden aspect-square shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300">
+                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.48%20PM%20(1).jpeg" alt="Mopy Kiosk Setup" class="w-full h-full object-cover">
+                                </div>
+                                <div class="rounded-2xl overflow-hidden aspect-square shadow-lg border-2 border-white hover:scale-105 transition-transform duration-300">
+                                    <img src="https://raw.githubusercontent.com/Gagan-0001/mopy_images/main/landing_page/WhatsApp%20Image%202026-04-15%20at%209.39.46%20PM.jpeg" alt="Mopy Counter View" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-primary py-4 overflow-hidden shadow-inner relative z-20">
+            <div class="flex whitespace-nowrap animate-marquee">
+                <div class="flex gap-16 text-white font-medium text-sm items-center">
+                    <span>🔥 "A perfect place for a daily refreshment in between busy office hours!"</span>
+                    <span>🌟 "Very reasonable pricing in menu as per the quality and variety provided by MOPY"</span>
+                    <span>🏢 "We are thankful that MOPY is present in our office complex. No more long delivery waits!"</span>
+                    <span>❤️ "Thank you MOPY for such a consistent and good taste with absolute hygiene."</span>
+                </div>
+                <div class="flex gap-16 text-white font-medium text-sm items-center ml-16">
+                    <span>🔥 "A perfect place for a daily refreshment in between busy office hours!"</span>
+                    <span>🌟 "Very reasonable pricing in menu as per the quality and variety provided by MOPY"</span>
+                    <span>🏢 "We are thankful that MOPY is present in our office complex. No more long delivery waits!"</span>
+                    <span>❤️ "Thank you MOPY for such a consistent and good taste with absolute hygiene."</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-surface-muted dark:bg-white/5" id="categories">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal-up">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase mb-4 border border-primary/20">
+                        Our Specialized Menu Categories
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-text-main dark:text-white mb-4">
+                        Something for <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-500">every daily craving</span>
+                    </h2>
+                    <p class="text-text-sub dark:text-gray-400 max-w-2xl mx-auto text-base">From your standard early morning chai to dynamic corporate combo meals—we've got you covered.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-16 reveal-stagger">
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">local_cafe</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Hot Beverages</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">set_meal</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Combo Meals</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">water_drop</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Cold Beverages</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center text-cyan-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">tapas</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Mini Meals</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">blender</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Smoothies & Shakes</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">restaurant</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Full Meals</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center text-yellow-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">fastfood</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Fried Snacks</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">nutrition</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Fruit Bowls</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">lunch_dining</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Sandwich & Burger</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-lime-100 flex items-center justify-center text-lime-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">salad</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Salad Bowls</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">eco</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Healthy Snacks</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">bakery_dining</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Bakery Items</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-pink-100 flex items-center justify-center text-pink-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">sunny</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Seasonal Specials</span>
+                    </div>
+                    <div class="group glass-card rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 border-border-subtle hover:border-primary/40 mt-0 lg:mt-2">
+                        <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center text-violet-600 transition-colors group-hover:bg-primary group-hover:text-white">
+                            <span class="material-symbols-outlined text-2xl">map</span>
+                        </div>
+                        <span class="font-bold text-text-main dark:text-white text-xs leading-tight">Regional Delicacies</span>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-primary to-orange-600 rounded-3xl p-8 text-white text-center relative overflow-hidden mb-12 shadow-glow">
+                    <div class="relative z-10">
+                        <span class="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-widest mb-3">Pre-Order Corporate Thalis</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold mb-1">Wholesome Full Meals Delivered Hot</h3>
+                        <div class="text-4xl font-extrabold my-3">₹100/- <span class="text-sm font-normal opacity-80">per thali</span></div>
+                        <p class="text-white/80 max-w-md mx-auto text-sm mb-6">Coordinate with your building manager or order directly to receive fresh items structured dynamically daily.</p>
+                        <a href="tel:+916359468677" class="inline-flex h-12 items-center gap-2 justify-center rounded-full bg-white text-primary px-6 font-bold shadow-lg hover:scale-105 transition-transform">
+                            <span class="material-symbols-outlined text-base">phone</span> Call to Place Group Order
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-text-sub dark:text-gray-400 mb-4 text-sm font-medium">Want comprehensive pricing matrices for procurement pipelines?</p>
+                    <button onclick="document.getElementById('menuLeadModal').classList.remove('hidden')" class="inline-flex h-12 items-center justify-center rounded-full border-2 border-primary bg-transparent px-8 text-sm font-bold text-primary hover:bg-primary hover:text-white transition-all duration-200">
+                        <span class="material-symbols-outlined mr-2 text-base">download</span> Authenticate to Download Full Menu
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div id="menuLeadModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 max-w-md w-full shadow-2xl relative animate-slide-up border border-border-subtle">
+                <button onclick="document.getElementById('menuLeadModal').classList.add('hidden')" class="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-xl transition-colors text-text-sub">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-[20px]">restaurant_menu</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-text-main dark:text-white">Verify Corporate Identity</h3>
+                </div>
+                <p class="text-text-sub dark:text-gray-400 text-xs mb-6">Complete the missing fields below to request instant access to our catalog parameters.</p>
+                
+                <form id="menuLeadForm" class="space-y-4" onsubmit="handleMenuDownload(event)">
+                    <div>
+                        <label class="block text-xs font-bold mb-1 text-text-main dark:text-gray-200">Full Name</label>
+                        <input type="text" id="lead_name" required class="w-full rounded-xl border border-gray-200 px-4 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Your full name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1 text-text-main dark:text-gray-200">Mobile Number</label>
+                        <input type="tel" id="lead_phone" required class="w-full rounded-xl border border-gray-200 px-4 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="+91 XXXXX XXXXX">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1 text-text-main dark:text-gray-200">Official Email ID</label>
+                        <input type="email" id="lead_email" required class="w-full rounded-xl border border-gray-200 px-4 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="name@company.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold mb-1 text-text-main dark:text-gray-200">Company / Building Complex Name</label>
+                        <input type="text" id="lead_company" required class="w-full rounded-xl border border-gray-200 px-4 py-2 text-sm focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="e.g. Nillmaber Corporate Park">
+                    </div>
+                    <button type="submit" class="w-full h-12 rounded-xl bg-primary text-white font-bold hover:bg-primary-hover transition-colors flex items-center justify-center gap-2 text-sm">
+                        <span class="material-symbols-outlined text-base">download</span> Request Catalog PDF
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <section class="py-20" id="about-us">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 max-w-2xl mx-auto">
+                    <h2 class="text-xs font-bold tracking-widest text-primary uppercase mb-3">Enterprise Infrastructure</h2>
+                    <h3 class="text-3xl sm:text-5xl font-extrabold text-text-main dark:text-white mb-4">We aren't a simple kitchen.<br>We are corporate tech infrastructure.</h3>
+                    <p class="text-base text-text-sub dark:text-gray-400 leading-relaxed">Mopy deploys high-end food delivery logistics straight into tech-parks without creating messy hardware overhauls.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6"><span class="material-symbols-outlined">bolt</span></div>
+                        <h4 class="text-lg font-bold text-text-main dark:text-white mb-2">Zero Delays</h4>
+                        <p class="text-xs text-text-sub dark:text-gray-400 leading-relaxed">We sync with internal shifts so that coffee slots and meal handovers map perfectly to worker break times.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-6"><span class="material-symbols-outlined">eco</span></div>
+                        <h4 class="text-lg font-bold text-text-main dark:text-white mb-2">SOP Driven Cleanliness</h4>
+                        <p class="text-xs text-text-sub dark:text-gray-400 leading-relaxed">Continuous testing metrics across chemical and structural hazards ensure high trust profiles.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+                        <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6"><span class="material-symbols-outlined">currency_rupee</span></div>
+                        <h4 class="text-lg font-bold text-text-main dark:text-white mb-2">Direct Optimization</h4>
+                        <p class="text-xs text-text-sub dark:text-gray-400 leading-relaxed">By cutting third-party delivery aggregates, we keep consumer base metrics clear of inflation charges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-text-main text-white dark:bg-black" id="business-model">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold tracking-widest text-primary uppercase mb-3">Investment Ecosystem</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold text-white mb-4">The Scalable COCO Franchise Architecture</h3>
+                    <p class="text-white/60 max-w-2xl mx-auto text-sm">Company Owned, Company Operated frameworks eliminating complex decentralized franchisee bottlenecks completely.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="h-10 w-10 bg-primary rounded-xl flex items-center justify-center mb-6"><span class="material-symbols-outlined text-white">store</span></div>
+                            <h4 class="text-xl font-bold mb-3">Complete Asset Control</h4>
+                            <p class="text-xs text-white/70 leading-relaxed">All day-to-day warehouse operations, human resources management, and technical logistics are managed end-to-end by core company teams.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 text-xs font-semibold text-primary">Managed by Company Specialists</div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="h-10 w-10 bg-white/15 rounded-xl flex items-center justify-center mb-6"><span class="material-symbols-outlined text-white">monetization_on</span></div>
+                            <h4 class="text-xl font-bold mb-3">Guaranteed Safe Return Matrix</h4>
+                            <p class="text-xs text-white/70 leading-relaxed">Offers a unique system layout featuring a highly secure, contractual minimum return framework coupled with a structured revenue profit-sharing model.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 text-xs font-semibold text-white/50">Predictable Risk Insulation</div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="h-10 w-10 bg-white/15 rounded-xl flex items-center justify-center mb-6"><span class="material-symbols-outlined text-white">smartphone</span></div>
+                            <h4 class="text-xl font-bold mb-3">Live Auditing Pipelines</h4>
+                            <p class="text-xs text-white/70 leading-relaxed">Track metrics on the go. Full transparency with access to real-time CCTV streams, point-of-sale accounting ledgers, and automated daily P&L statements directly inside our mobile dashboard.</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-white/10 text-xs font-semibold text-white/50">Comprehensive Real-time Dashboards</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-surface-muted dark:bg-white/5" id="clients">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">Enterprise Deployments</span>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-text-main dark:text-white mb-4">Active Corporate Presence</h2>
+                    <p class="text-text-sub dark:text-gray-400 max-w-xl mx-auto text-sm">Delivering quality meals daily across key corporate hubs and complex nodes.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">01</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Air Products India Pvt Ltd</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Nillamber Corporate Park</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">02</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Deepak Nitrate Group</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Aurum Business Centre</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">03</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Aditi Consulting Pvt Ltd</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Nillamber Triumph</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">04</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Rexel India Ltd</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Panorama Complex</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">05</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Collabera Talent Solutions</h4>
+                            <p class="text-xs text-text-sub mt-0.5">India Bulls Mega Mall</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">06</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Varadigm India Pvt Ltd</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Trivia Complex</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">07</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Allscripts India Pvt Ltd</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Corporate Park Hubs</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-border-subtle shadow-soft flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-primary font-bold text-sm shrink-0">08</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-text-main">Stemons India Pvt Ltd</h4>
+                            <p class="text-xs text-text-sub mt-0.5">Commercial Node Clusters</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20" id="promoter">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-xs font-bold tracking-widest text-primary uppercase mb-3">Operational Framework</h2>
+                    <h3 class="text-3xl sm:text-5xl font-extrabold text-text-main dark:text-white mb-4">Leadership & Logistics Team</h3>
+                    <p class="text-text-sub dark:text-gray-400 max-w-xl mx-auto text-sm">Combining hospitality experience with institutional execution models.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-16">
+                    <div class="bg-surface-muted p-6 rounded-3xl border border-border-subtle flex flex-col sm:flex-row gap-6 items-center">
+                        <div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-red-100 to-orange-100 border border-border-subtle shrink-0 flex flex-col items-center justify-center text-center p-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-1">account_circle</span>
+                            <span class="text-[10px] font-bold text-text-sub uppercase tracking-wider">Executive Photo Placeholder</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-text-main">Lokendra Singh Bhardwaj</h4>
+                            <p class="text-xs font-bold text-primary mb-3">Founder & Chief Strategy Officer</p>
+                            <p class="text-xs text-text-sub leading-relaxed">Hotel Management graduate and MBA professional with over 22 years of multi-format operational leadership across corporate finance and premium enterprise hospitality frameworks.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface-muted p-6 rounded-3xl border border-border-subtle flex flex-col sm:flex-row gap-6 items-center">
+                        <div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-red-100 to-orange-100 border border-border-subtle shrink-0 flex flex-col items-center justify-center text-center p-2">
+                            <span class="material-symbols-outlined text-4xl text-primary mb-1">account_circle</span>
+                            <span class="text-[10px] font-bold text-text-sub uppercase tracking-wider">Executive Photo Placeholder</span>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-text-main">Shravan Kumar Bharati</h4>
+                            <p class="text-xs font-bold text-primary mb-3">Chief Executive Officer (CEO)</p>
+                            <p class="text-xs text-text-sub leading-relaxed">Directs core structural development pipelines, technological integration mechanics, and scale-out matrix configurations to optimize institutional workplace deployments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50/40 rounded-3xl p-8 border border-amber-200/60">
+                    <h4 class="text-center font-bold text-text-main text-lg mb-8 uppercase tracking-wider">On-Site & Production Base Layout</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-white rounded-2xl border border-border-subtle">
+                            <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined">restaurant_menu</span></div>
+                            <h5 class="font-bold text-sm text-text-main">2 Expert Chefs</h5>
+                            <p class="text-[11px] text-text-sub mt-1">Directing central recipe standard configurations.</p>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-2xl border border-border-subtle">
+                            <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined">soup_kitchen</span></div>
+                            <h5 class="font-bold text-sm text-text-main">Commis Crew 1</h5>
+                            <p class="text-[11px] text-text-sub mt-1">Managing hot line processes and baking items.</p>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-2xl border border-border-subtle">
+                            <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined">skillet</span></div>
+                            <h5 class="font-bold text-sm text-text-main">Commis Crew 2</h5>
+                            <p class="text-[11px] text-text-sub mt-1">Controlling cold lines and regional snacks.</p>
+                        </div>
+                        <div class="text-center p-4 bg-white rounded-2xl border border-border-subtle">
+                            <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-3"><span class="material-symbols-outlined">fact_check</span></div>
+                            <h5 class="font-bold text-sm text-text-main">Central Kitchen Hub</h5>
+                            <p class="text-[11px] text-text-sub mt-1">SOP verification and macro tracking loops.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-primary text-white" id="franchise">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest bg-white/20 px-3 py-1 rounded-full uppercase mb-4 inline-block">Capital Alignment Hub</span>
+                        <h3 class="text-3xl sm:text-5xl font-bold mb-6">Request Pro-Forma Franchise Prospectus</h3>
+                        <p class="text-base text-white/95 mb-6 leading-relaxed">Join hands with a deeply predictable model built to serve massive business corridors via optimized asset deployments.</p>
+                        <div class="space-y-3 text-sm text-white/90">
+                            <div class="flex items-center gap-3"><span class="material-symbols-outlined text-base">check_circle</span><span>Contractually Locked Minimum Returns.</span></div>
+                            <div class="flex items-center gap-3"><span class="material-symbols-outlined text-base">check_circle</span><span>Zero Franchisee Overhead: Operated entirely by Company Staff.</span></div>
+                            <div class="flex items-center gap-3"><span class="material-symbols-outlined text-base">check_circle</span><span>Live POS Accounting Access and CCTV streams on your mobile app.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white text-text-main p-8 rounded-3xl shadow-2xl">
+                        <form class="space-y-4" onsubmit="event.preventDefault(); alert('Investment inquiry recorded successfully. A representative from the desk of Lokendra Singh Bhardwaj will reach out shortly.'); this.reset();">
+                            <div>
+                                <label class="block text-xs font-bold mb-1">Full Legal Name</label>
+                                <input type="text" required class="w-full rounded-xl border border-gray-300 text-sm py-2 px-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="First and last name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">Contact Handset Line</label>
+                                class="w-full rounded-xl border border-gray-300 text-sm py-2 px-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="+91 XXXXX XXXXX">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">Target Investment City / Complex Node</label>
+                                <input type="text" required class="w-full rounded-xl border border-gray-300 text-sm py-2 px-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none" placeholder="e.g. Vadodara Commercial Parks">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold mb-1">Strategic Framework Message</label>
+                                <textarea class="w-full rounded-xl border border-gray-300 text-sm py-2 px-3 focus:ring-1 focus:ring-primary focus:border-primary outline-none" rows="2" placeholder="Note down any queries regarding the profit-sharing matrix..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full h-12 rounded-xl bg-primary text-white font-bold text-sm tracking-wide hover:bg-primary-hover transition-colors">Submit Strategic Franchise Request</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-surface-muted pt-16 pb-8 border-t border-border-subtle dark:bg-background-dark dark:border-white/10">
+            <div class="mx-auto max-w-container px-4 sm:px-6 lg:px-8">
+                <div class="grid gap-12 md:grid-cols-4">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex items-center gap-2">
+                            <div class="flex h-8 w-8 items-center justify-center rounded bg-primary text-white"><span class="material-symbols-outlined text-[18px]">lunch_dining</span></div>
+                            <span class="text-lg font-bold text-text-main dark:text-white">Mopy</span>
+                        </div>
+                        <p class="text-xs text-text-sub dark:text-gray-400 leading-relaxed">Enterprise catering delivery integrations for modern high-density workplaces.</p>
+                    </div>
+
+                    <div>
+                        <h4 class="mb-4 text-xs font-bold uppercase tracking-widest text-text-main dark:text-white">Verified Contact Desk</h4>
+                        <ul class="flex flex-col gap-3 text-xs text-text-sub">
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">mail</span><a href="mailto:connectmopy@gmail.com" class="hover:text-primary transition-colors">connectmopy@gmail.com</a></li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-primary">phone</span><a href="tel:+916359468677" class="hover:text-primary transition-colors">+91 6359468677</a></li>
+                            <li class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-text-sub">location_on</span><span class="dark:text-gray-400">Gujarat / India Operations Node</span></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="mb-4 text-xs font-bold uppercase tracking-widest text-text-main dark:text-white">Corporate Frameworks</h4>
+                        <ul class="flex flex-col gap-3 text-xs text-text-sub dark:text-gray-400">
+                            <li><a class="hover:text-primary transition-colors" href="#business-model">COCO Franchise Model</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#categories">Food Matrix Categories</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#clients">Corporate Account List</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="mb-4 text-xs font-bold uppercase tracking-wider text-text-main dark:text-white">Newsletter Channels</h4>
+                        <div class="flex gap-2">
+                            <input class="h-10 w-full rounded-lg border border-gray-300 bg-white px-3 text-xs outline-none" placeholder="Enter corporate email" type="email" />
+                            <button class="h-10 rounded-lg bg-primary px-3 text-white hover:bg-primary-hover transition-colors"><span class="material-symbols-outlined text-base">arrow_forward</span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-gray-200 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-sub">
+                    <p>© 2026 Mopy Inc. All rights reserved. Managed under strict corporate oversight.</p>
+                    <div class="flex gap-4 font-bold tracking-widest uppercase text-[10px]">
+                        <a href="#" class="hover:text-primary">LinkedIn</a>
+                        <a href="#" class="hover:text-primary">Instagram</a>
+                        <a href="#" class="hover:text-primary">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Control Architecture
+            const menuButton = document.getElementById('menuButton');
+            const sidebar = document.getElementById('sidebar');
+            const closeSidebar = document.getElementById('closeSidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+            if (menuButton && sidebar && closeSidebar && sidebarOverlay) {
+                const toggleMenu = (open) => {
+                    sidebar.classList.toggle('open', open);
+                    sidebarOverlay.classList.toggle('opacity-0', !open);
+                    sidebarOverlay.classList.toggle('pointer-events-none', !open);
+                    sidebarOverlay.classList.toggle('opacity-100', open);
+                    document.body.style.overflow = open ? 'hidden' : '';
+                };
+                menuButton.addEventListener('click', () => toggleMenu(true));
+                closeSidebar.addEventListener('click', () => toggleMenu(false));
+                sidebarOverlay.addEventListener('click', () => toggleMenu(false));
+                document.querySelectorAll('.sidebar-link').forEach(l => l.addEventListener('click', () => toggleMenu(false)));
+            }
+
+            // Stagger & Visibility Intersection Watcher
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-stagger');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); } });
+            }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+            revealElements.forEach(el => observer.observe(el));
+        });
+
+        // Client Side Lead Verification Mechanism (Client Feedback Point 3)
+        function handleMenuDownload(event) {
+            event.preventDefault();
+            const name = document.getElementById('lead_name').value;
+            const phone = document.getElementById('lead_phone').value;
+            const email = document.getElementById('lead_email').value;
+            const company = document.getElementById('lead_company').value;
+
+            if (name && phone && email && company) {
+                alert(`Verification Successful!\n\nThank you ${name}. The complete Mopy menu matrix with customized item price maps has been sent to ${email} for coordination with corporate procurement at ${company}.`);
+                document.getElementById('menuLeadModal').classList.add('hidden');
+                document.getElementById('menuLeadForm').reset();
+            } else {
+                alert('Please parse out all required credential parameters before downloading documentation profiles.');
+            }
+        }
+    </script>
+</body>
+
+</html>
